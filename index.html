@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Interaction Examples</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>DOM Interaction Examples</h1>
+
+    <!-- Photo Resizing Section -->
+    <section>
+        <h2>1. Photo Resizing</h2>
+        <img id="photo" src="https://pbs.twimg.com/media/FBQkTUVXIAcrS_5?format=jpg&name=large" alt="Sample Photo" width="150">
+        <br>
+        <button id="increase-size">Increase Size</button>
+        <button id="decrease-size">Decrease Size</button>
+    </section>
+
+    <hr>
+
+    <!-- Text Color Changer Section -->
+    <section>
+        <h2>2. Text Color Changer</h2>
+        <p id="color-text" style="color: black;">Black</p>
+        <button id="change-color">Change Color</button>
+    </section>
+
+    <hr>
+
+    <!-- Content Toggle Section -->
+    <section>
+        <h2>3. Content Toggle</h2>
+        <button id="toggle-content">Show Content</button>
+        <div id="content" class="hidden">
+            <p>This is the hidden content that can be shown or hidden.</p>
+        </div>
+    </section>
+
+    <script>
+        // Photo Resizing
+        const photo = document.getElementById('photo');
+        document.getElementById('increase-size').addEventListener('click', () => {
+            let currentWidth = parseInt(photo.width);
+            photo.width = currentWidth + 20;
+        });
+        document.getElementById('decrease-size').addEventListener('click', () => {
+            let currentWidth = parseInt(photo.width);
+            photo.width = currentWidth - 20 > 0 ? currentWidth - 20 : currentWidth;
+        });
+
+        // Text Color Changer
+        const colorText = document.getElementById('color-text');
+        const colors = ['black', 'red', 'blue', 'green', 'orange'];
+        let colorIndex = 0;
+        document.getElementById('change-color').addEventListener('click', () => {
+            colorIndex = (colorIndex + 1) % colors.length;
+            colorText.style.color = colors[colorIndex];
+            colorText.textContent = colors[colorIndex].charAt(0).toUpperCase() + colors[colorIndex].slice(1);
+        });
+
+        // Content Toggle
+        const content = document.getElementById('content');
+        const toggleButton = document.getElementById('toggle-content');
+        toggleButton.addEventListener('click', () => {
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                toggleButton.textContent = 'Hide Content';
+            } else {
+                content.classList.add('hidden');
+                toggleButton.textContent = 'Show Content';
+            }
+        });
+    </script>
+</body>
+</html>
